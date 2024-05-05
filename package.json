@@ -1,0 +1,28 @@
+{
+  "type": "module",
+  "name": "node.js-hw1",
+  "version": "1.0.0",
+  "description": "tema 1",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ioanadev/node.js-hw1.git"
+  },
+  "author": "Hliboceanu Ioana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ioanadev/node.js-hw1/issues"
+  },
+  "homepage": "https://github.com/ioanadev/node.js-hw1#readme",
+  "dependencies": {
+    "color": "^4.2.3",
+    "colors": "^1.4.0",
+    "nodemon": "^3.1.0",
+    "yargs": "^17.7.2"
+  }
+}
