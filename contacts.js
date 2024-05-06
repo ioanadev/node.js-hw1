@@ -16,13 +16,9 @@ const contactsPath = `${__dirname}\\db\\contacts.json`;
 export async function listContacts() {
    try {
     const data = await fs.readFile(contactsPath, { encoding: 'utf8' });
-    // console.log("Date contacts:", data);
     const contacts = JSON.parse(data)
-    // console.log("Date contacts array:", contacts);
-    // console.log("Lungimea contacts array:", contacts.length);
-    console.log("Contacts:", contacts);
-    console.log("Data trim:", data.trim())
-    if (data.trim() === "") {
+    console.table(contacts);
+    if (contacts.length === 0) {
       console.log("Nu există contacte.".red);
       return;
     }
@@ -57,7 +53,6 @@ export async function removeContact(contactId) {
     const data = await fs.readFile(contactsPath, { encoding: 'utf8' });
     const contacts = JSON.parse(data);
     const contactIndex = contacts.findIndex(contact=>contact.id === contactId);
-    console.log(contactIndex);
 
     if(contactIndex === -1){
       console.log("Contact not found!");
@@ -65,7 +60,6 @@ export async function removeContact(contactId) {
     }
 
     contacts.splice(contactIndex, 1);
-    // console.log("Contacte fara contactul sters", contacts);
     await fs.writeFile(contactsPath, JSON.stringify(contacts));
      console.log("The contact has been removed!".bgMagenta);
 
@@ -74,7 +68,6 @@ export async function removeContact(contactId) {
     console.log(err);
   }
 }
-// removeContact("d4670136-e354-44ec-8ff7-5f9f62e8330e");
   
 
 //^^^^^^^^^^^^ Adaugarea de noi contacte ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -82,12 +75,6 @@ export async function addContact(name, email, phone) {
     try {
         const data = await fs.readFile(contactsPath, { encoding: 'utf8' });
         const contacts = JSON.parse(data);
-
-        // const existingContact = contacts.find(contact=>contact.name === name && contact.email === email &&contact.phone === phone)
-        //  if (existingContact){
-        //   console.log("This contact already exists.".bgBrightYellow);
-        //   return;
-        //  }
 
        //######verifica existenta contactului##########################
         const existingName = contacts.find(contact=>contact.name === name);
@@ -133,10 +120,7 @@ export async function addContact(name, email, phone) {
            //scriem obiectul contacts in fisierul contacts.json
            await fs.writeFile(contactsPath, JSON.stringify(contacts), { encoding: 'utf8' } );
            console.log("The contact has ben created!".bgBrightGreen);
-           //  console.log(contacts)
            console.log(`${newContactId}, ${name}, ${email}, ${phone}`);
-           // console.log(newContacts);
-          //  console.log("Contacts dupa adaugare:", contacts);
           } else{
             console.log("The contact dose not have all required parameters!".bgBrightRed);
             }
@@ -145,5 +129,4 @@ export async function addContact(name, email, phone) {
      console.log(err);
     }
   }
-  // addContact("Ioana", "exemple@exemple.ro", "0741299545");
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^6
+   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^6
